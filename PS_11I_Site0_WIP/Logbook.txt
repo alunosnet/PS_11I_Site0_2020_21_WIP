@@ -1,0 +1,19 @@
+﻿create table Trabalhadores(
+	id int identity primary key,
+	nome varchar(60) not null
+		check (len(nome)>=3),
+	data_nascimento date,
+	vencimento money,
+	morada varchar(100),
+	codigo_postal varchar(8) 
+			check (codigo_postal like '%-%'),
+	contacto varchar(20)
+)
+
+create table Faltas(
+	id int identity primary key,
+	dia_falta date,
+	id_trabalhador int references Trabalhadores(id) 
+		on delete cascade,
+	tipo varchar(1)
+)
